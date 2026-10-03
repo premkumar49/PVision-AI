@@ -1,0 +1,120 @@
+{
+    "Plant_1": {
+        "plant_id": 1,
+        "raw_generation_rows": 68778,
+        "raw_weather_rows": 3182,
+        "duplicates_removed": 0,
+        "missing_values_imputed": 0,
+        "merged_records": 68774,
+        "ghost_night_records_corrected": 0,
+        "daytime_inverter_outages_filtered": 63,
+        "operational_records_retained": 68711,
+        "selected_features": [
+            "AMBIENT_TEMPERATURE",
+            "MODULE_TEMPERATURE",
+            "IRRADIATION",
+            "TEMP_DIFFERENCE",
+            "IRRAD_MODULE_INTERACTION",
+            "HOUR",
+            "SIN_TIME",
+            "COS_TIME",
+            "IS_DAYTIME"
+        ],
+        "target": "AC_POWER",
+        "target_leakage_prevented": [
+            "DC_POWER excluded (avoids r=0.9999 identity shortcut)",
+            "TOTAL_YIELD excluded (cumulative non-stationary)",
+            "DAILY_YIELD excluded (leaks daily progression)"
+        ],
+        "data_splits": {
+            "train_samples": 48097,
+            "val_samples": 10307,
+            "test_samples": 10307,
+            "train_ratio": 70.0,
+            "val_ratio": 15.0,
+            "test_ratio": 15.0
+        },
+        "scaler_saved_path": "D:\\SolarPredict\\PVision_AI\\models\\solar_ann_scaler_plant1.joblib",
+        "scaler_feature_means": {
+            "AMBIENT_TEMPERATURE": 25.5532,
+            "MODULE_TEMPERATURE": 31.2315,
+            "IRRADIATION": 0.232,
+            "TEMP_DIFFERENCE": 5.6783,
+            "IRRAD_MODULE_INTERACTION": 10.8237,
+            "HOUR": 11.5298,
+            "SIN_TIME": 0.0006,
+            "COS_TIME": -0.0135,
+            "IS_DAYTIME": 0.5582
+        },
+        "scaler_feature_stds": {
+            "AMBIENT_TEMPERATURE": 3.3666,
+            "MODULE_TEMPERATURE": 12.3251,
+            "IRRADIATION": 0.3019,
+            "TEMP_DIFFERENCE": 9.6028,
+            "IRRAD_MODULE_INTERACTION": 15.8504,
+            "HOUR": 6.8694,
+            "SIN_TIME": 0.7054,
+            "COS_TIME": 0.7087,
+            "IS_DAYTIME": 0.4966
+        }
+    },
+    "Plant_2": {
+        "plant_id": 2,
+        "raw_generation_rows": 67698,
+        "raw_weather_rows": 3259,
+        "duplicates_removed": 0,
+        "missing_values_imputed": 0,
+        "merged_records": 67698,
+        "ghost_night_records_corrected": 14,
+        "daytime_inverter_outages_filtered": 3788,
+        "operational_records_retained": 63910,
+        "selected_features": [
+            "AMBIENT_TEMPERATURE",
+            "MODULE_TEMPERATURE",
+            "IRRADIATION",
+            "TEMP_DIFFERENCE",
+            "IRRAD_MODULE_INTERACTION",
+            "HOUR",
+            "SIN_TIME",
+            "COS_TIME",
+            "IS_DAYTIME"
+        ],
+        "target": "AC_POWER",
+        "target_leakage_prevented": [
+            "DC_POWER excluded (avoids r=0.9999 identity shortcut)",
+            "TOTAL_YIELD excluded (cumulative non-stationary)",
+            "DAILY_YIELD excluded (leaks daily progression)"
+        ],
+        "data_splits": {
+            "train_samples": 44737,
+            "val_samples": 9586,
+            "test_samples": 9587,
+            "train_ratio": 70.0,
+            "val_ratio": 15.0,
+            "test_ratio": 15.0
+        },
+        "scaler_saved_path": "D:\\SolarPredict\\PVision_AI\\models\\solar_ann_scaler_plant2.joblib",
+        "scaler_feature_means": {
+            "AMBIENT_TEMPERATURE": 27.7274,
+            "MODULE_TEMPERATURE": 31.4948,
+            "IRRADIATION": 0.1968,
+            "TEMP_DIFFERENCE": 3.7675,
+            "IRRAD_MODULE_INTERACTION": 8.9827,
+            "HOUR": 11.5197,
+            "SIN_TIME": -0.0025,
+            "COS_TIME": 0.0545,
+            "IS_DAYTIME": 0.5466
+        },
+        "scaler_feature_stds": {
+            "AMBIENT_TEMPERATURE": 3.9519,
+            "MODULE_TEMPERATURE": 10.4306,
+            "IRRADIATION": 0.2841,
+            "TEMP_DIFFERENCE": 7.4071,
+            "IRRAD_MODULE_INTERACTION": 14.6021,
+            "HOUR": 7.1103,
+            "SIN_TIME": 0.723,
+            "COS_TIME": 0.6887,
+            "IS_DAYTIME": 0.4978
+        }
+    }
+}

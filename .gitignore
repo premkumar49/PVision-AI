@@ -1,0 +1,36 @@
+# Python & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# IDE & Editor Configs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large Model Checkpoints & Weights
+models/cnn/*.keras
+models/*.pth
+models/*.pt
+models/*.pkl
+
+# OS Metadata
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Logs
+*.log
+outputs/*.log
