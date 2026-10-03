@@ -1,0 +1,140 @@
+{
+    "dataset_path": "D:\\SolarPredict\\PVision_AI\\data\\pv_fault",
+    "modalities_inspected": [
+        "gasf_images",
+        "iv_images"
+    ],
+    "total_images": 69484,
+    "modality_reports": {
+        "gasf_images": {
+            "modality": "gasf_images",
+            "total_images": 35000,
+            "classes_identified": [
+                "crack",
+                "global_aging",
+                "hotspot",
+                "normal",
+                "partial_aging",
+                "shading",
+                "short_circuit"
+            ],
+            "class_counts": {
+                "crack": 5000,
+                "global_aging": 5000,
+                "hotspot": 5000,
+                "normal": 5000,
+                "partial_aging": 5000,
+                "shading": 5000,
+                "short_circuit": 5000
+            },
+            "class_distribution_percentage": {
+                "crack": 14.29,
+                "global_aging": 14.29,
+                "hotspot": 14.29,
+                "normal": 14.29,
+                "partial_aging": 14.29,
+                "shading": 14.29,
+                "short_circuit": 14.29
+            },
+            "missing_classes": [],
+            "unexpected_classes": [],
+            "image_resolutions_detected": [
+                [
+                    256,
+                    256
+                ]
+            ],
+            "color_modes_detected": [
+                "RGB"
+            ],
+            "formats_detected": [
+                "PNG"
+            ],
+            "missing_sequence_details": {},
+            "corrupted_files_count": 0,
+            "corrupted_files_sample": [],
+            "duplicates": {
+                "samples_checked": 3000,
+                "duplicates_found": 0,
+                "duplicate_groups": 0,
+                "sample_clusters": []
+            }
+        },
+        "iv_images": {
+            "modality": "iv_images",
+            "total_images": 34484,
+            "classes_identified": [
+                "crack",
+                "global_aging",
+                "hotspot",
+                "normal",
+                "partial_aging",
+                "shading",
+                "short_circuit"
+            ],
+            "class_counts": {
+                "crack": 5000,
+                "global_aging": 5000,
+                "hotspot": 5000,
+                "normal": 5000,
+                "partial_aging": 5000,
+                "shading": 5000,
+                "short_circuit": 4484
+            },
+            "class_distribution_percentage": {
+                "crack": 14.5,
+                "global_aging": 14.5,
+                "hotspot": 14.5,
+                "normal": 14.5,
+                "partial_aging": 14.5,
+                "shading": 14.5,
+                "short_circuit": 13.0
+            },
+            "missing_classes": [],
+            "unexpected_classes": [],
+            "image_resolutions_detected": [
+                [
+                    1343,
+                    808
+                ]
+            ],
+            "color_modes_detected": [
+                "RGB"
+            ],
+            "formats_detected": [
+                "PNG"
+            ],
+            "missing_sequence_details": {
+                "short_circuit": {
+                    "expected_count": 5000,
+                    "present_count": 4484,
+                    "missing_count": 516,
+                    "missing_index_ranges": [
+                        "1-513",
+                        "597-599"
+                    ],
+                    "sample_missing_indices": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10
+                    ]
+                }
+            },
+            "corrupted_files_count": 0,
+            "corrupted_files_sample": [],
+            "duplicates": {
+                "samples_checked": 3000,
+                "duplicates_found": 0,
+                "duplicate_groups": 0,
+                "sample_clusters": []
+            }
+        }
+    }
+}

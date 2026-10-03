@@ -1,0 +1,904 @@
+{
+    "project": "PVision AI",
+    "description": "Hybrid CNN-ANN Framework for Photovoltaic Fault Detection and Power Generation Prediction",
+    "pv_fault": {
+        "dataset_path": "D:\\SolarPredict\\PVision_AI\\data\\pv_fault",
+        "modalities_inspected": [
+            "gasf_images",
+            "iv_images"
+        ],
+        "total_images": 69484,
+        "modality_reports": {
+            "gasf_images": {
+                "modality": "gasf_images",
+                "total_images": 35000,
+                "classes_identified": [
+                    "crack",
+                    "global_aging",
+                    "hotspot",
+                    "normal",
+                    "partial_aging",
+                    "shading",
+                    "short_circuit"
+                ],
+                "class_counts": {
+                    "crack": 5000,
+                    "global_aging": 5000,
+                    "hotspot": 5000,
+                    "normal": 5000,
+                    "partial_aging": 5000,
+                    "shading": 5000,
+                    "short_circuit": 5000
+                },
+                "class_distribution_percentage": {
+                    "crack": 14.29,
+                    "global_aging": 14.29,
+                    "hotspot": 14.29,
+                    "normal": 14.29,
+                    "partial_aging": 14.29,
+                    "shading": 14.29,
+                    "short_circuit": 14.29
+                },
+                "missing_classes": [],
+                "unexpected_classes": [],
+                "image_resolutions_detected": [
+                    [
+                        256,
+                        256
+                    ]
+                ],
+                "color_modes_detected": [
+                    "RGB"
+                ],
+                "formats_detected": [
+                    "PNG"
+                ],
+                "missing_sequence_details": {},
+                "corrupted_files_count": 0,
+                "corrupted_files_sample": [],
+                "duplicates": {
+                    "samples_checked": 3000,
+                    "duplicates_found": 0,
+                    "duplicate_groups": 0,
+                    "sample_clusters": []
+                }
+            },
+            "iv_images": {
+                "modality": "iv_images",
+                "total_images": 34484,
+                "classes_identified": [
+                    "crack",
+                    "global_aging",
+                    "hotspot",
+                    "normal",
+                    "partial_aging",
+                    "shading",
+                    "short_circuit"
+                ],
+                "class_counts": {
+                    "crack": 5000,
+                    "global_aging": 5000,
+                    "hotspot": 5000,
+                    "normal": 5000,
+                    "partial_aging": 5000,
+                    "shading": 5000,
+                    "short_circuit": 4484
+                },
+                "class_distribution_percentage": {
+                    "crack": 14.5,
+                    "global_aging": 14.5,
+                    "hotspot": 14.5,
+                    "normal": 14.5,
+                    "partial_aging": 14.5,
+                    "shading": 14.5,
+                    "short_circuit": 13.0
+                },
+                "missing_classes": [],
+                "unexpected_classes": [],
+                "image_resolutions_detected": [
+                    [
+                        1343,
+                        808
+                    ]
+                ],
+                "color_modes_detected": [
+                    "RGB"
+                ],
+                "formats_detected": [
+                    "PNG"
+                ],
+                "missing_sequence_details": {
+                    "short_circuit": {
+                        "expected_count": 5000,
+                        "present_count": 4484,
+                        "missing_count": 516,
+                        "missing_index_ranges": [
+                            "1-513",
+                            "597-599"
+                        ],
+                        "sample_missing_indices": [
+                            1,
+                            2,
+                            3,
+                            4,
+                            5,
+                            6,
+                            7,
+                            8,
+                            9,
+                            10
+                        ]
+                    }
+                },
+                "corrupted_files_count": 0,
+                "corrupted_files_sample": [],
+                "duplicates": {
+                    "samples_checked": 3000,
+                    "duplicates_found": 0,
+                    "duplicate_groups": 0,
+                    "sample_clusters": []
+                }
+            }
+        }
+    },
+    "solar_generation": {
+        "dataset_directory": "D:\\SolarPredict\\PVision_AI\\data\\solar_generation",
+        "csv_files_count": 4,
+        "file_reports": {
+            "Plant_1_Generation_Data.csv": {
+                "filename": "Plant_1_Generation_Data.csv",
+                "rows": 68778,
+                "columns": 7,
+                "column_names": [
+                    "DATE_TIME",
+                    "PLANT_ID",
+                    "SOURCE_KEY",
+                    "DC_POWER",
+                    "AC_POWER",
+                    "DAILY_YIELD",
+                    "TOTAL_YIELD"
+                ],
+                "numerical_columns": [
+                    "PLANT_ID",
+                    "DC_POWER",
+                    "AC_POWER",
+                    "DAILY_YIELD",
+                    "TOTAL_YIELD"
+                ],
+                "categorical_columns": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "total_missing_values": 0,
+                "missing_values_by_column": {
+                    "DATE_TIME": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "PLANT_ID": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "SOURCE_KEY": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "DC_POWER": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "AC_POWER": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "DAILY_YIELD": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "TOTAL_YIELD": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    }
+                },
+                "exact_duplicate_rows": 0,
+                "composite_key_checked": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "composite_key_duplicates": 0,
+                "descriptive_statistics": {
+                    "PLANT_ID": {
+                        "count": 68778,
+                        "mean": 4135001.0,
+                        "std": 0.0,
+                        "min": 4135001.0,
+                        "q25": 4135001.0,
+                        "median": 4135001.0,
+                        "q75": 4135001.0,
+                        "max": 4135001.0,
+                        "skewness": 0.0,
+                        "kurtosis": 0.0
+                    },
+                    "DC_POWER": {
+                        "count": 68778,
+                        "mean": 3147.4262,
+                        "std": 4036.4572,
+                        "min": 0.0,
+                        "q25": 0.0,
+                        "median": 429.0,
+                        "q75": 6366.9643,
+                        "max": 14471.125,
+                        "skewness": 0.9584,
+                        "kurtosis": -0.4884
+                    },
+                    "AC_POWER": {
+                        "count": 68778,
+                        "mean": 307.8028,
+                        "std": 394.3964,
+                        "min": 0.0,
+                        "q25": 0.0,
+                        "median": 41.4938,
+                        "q75": 623.6188,
+                        "max": 1410.95,
+                        "skewness": 0.9534,
+                        "kurtosis": -0.5026
+                    },
+                    "DAILY_YIELD": {
+                        "count": 68778,
+                        "mean": 3295.9687,
+                        "std": 3145.1783,
+                        "min": 0.0,
+                        "q25": 0.0,
+                        "median": 2658.7143,
+                        "q75": 6274.0,
+                        "max": 9163.0,
+                        "skewness": 0.2758,
+                        "kurtosis": -1.5367
+                    },
+                    "TOTAL_YIELD": {
+                        "count": 68778,
+                        "mean": 6978711.7607,
+                        "std": 416271.9829,
+                        "min": 6183645.0,
+                        "q25": 6512002.5358,
+                        "median": 7146685.0,
+                        "q75": 7268705.9062,
+                        "max": 7846821.0,
+                        "skewness": -0.4183,
+                        "kurtosis": -1.007
+                    }
+                },
+                "categorical_summary": {
+                    "DATE_TIME": {
+                        "unique_count": 3158,
+                        "top_values": {
+                            "15-05-2020 01:00": 22,
+                            "15-05-2020 01:45": 22,
+                            "15-05-2020 04:15": 22,
+                            "15-05-2020 04:30": 22,
+                            "15-05-2020 04:45": 22
+                        }
+                    },
+                    "SOURCE_KEY": {
+                        "unique_count": 22,
+                        "top_values": {
+                            "bvBOhCH3iADSZry": 3155,
+                            "1BY6WEcLGh8j5v7": 3154,
+                            "7JYdWkrLSPkdwr4": 3133,
+                            "VHMLBKoKgIrUVDU": 3133,
+                            "ZnxXDlPa8U1GXgE": 3130
+                        }
+                    }
+                },
+                "correlation_matrix": {
+                    "PLANT_ID": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": NaN,
+                        "AC_POWER": NaN,
+                        "DAILY_YIELD": NaN,
+                        "TOTAL_YIELD": NaN
+                    },
+                    "DC_POWER": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 1.0,
+                        "AC_POWER": 1.0,
+                        "DAILY_YIELD": 0.0823,
+                        "TOTAL_YIELD": 0.0038
+                    },
+                    "AC_POWER": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 1.0,
+                        "AC_POWER": 1.0,
+                        "DAILY_YIELD": 0.0822,
+                        "TOTAL_YIELD": 0.0038
+                    },
+                    "DAILY_YIELD": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 0.0823,
+                        "AC_POWER": 0.0822,
+                        "DAILY_YIELD": 1.0,
+                        "TOTAL_YIELD": 0.0099
+                    },
+                    "TOTAL_YIELD": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 0.0038,
+                        "AC_POWER": 0.0038,
+                        "DAILY_YIELD": 0.0099,
+                        "TOTAL_YIELD": 1.0
+                    }
+                }
+            },
+            "Plant_1_Weather_Sensor_Data.csv": {
+                "filename": "Plant_1_Weather_Sensor_Data.csv",
+                "rows": 3182,
+                "columns": 6,
+                "column_names": [
+                    "DATE_TIME",
+                    "PLANT_ID",
+                    "SOURCE_KEY",
+                    "AMBIENT_TEMPERATURE",
+                    "MODULE_TEMPERATURE",
+                    "IRRADIATION"
+                ],
+                "numerical_columns": [
+                    "PLANT_ID",
+                    "AMBIENT_TEMPERATURE",
+                    "MODULE_TEMPERATURE",
+                    "IRRADIATION"
+                ],
+                "categorical_columns": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "total_missing_values": 0,
+                "missing_values_by_column": {
+                    "DATE_TIME": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "PLANT_ID": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "SOURCE_KEY": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "IRRADIATION": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    }
+                },
+                "exact_duplicate_rows": 0,
+                "composite_key_checked": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "composite_key_duplicates": 0,
+                "descriptive_statistics": {
+                    "PLANT_ID": {
+                        "count": 3182,
+                        "mean": 4135001.0,
+                        "std": 0.0,
+                        "min": 4135001.0,
+                        "q25": 4135001.0,
+                        "median": 4135001.0,
+                        "q75": 4135001.0,
+                        "max": 4135001.0,
+                        "skewness": 0.0,
+                        "kurtosis": 0.0
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "count": 3182,
+                        "mean": 25.5316,
+                        "std": 3.3549,
+                        "min": 20.3985,
+                        "q25": 22.7052,
+                        "median": 24.6138,
+                        "q75": 27.9205,
+                        "max": 35.2525,
+                        "skewness": 0.6905,
+                        "kurtosis": -0.506
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "count": 3182,
+                        "mean": 31.091,
+                        "std": 12.2612,
+                        "min": 18.1404,
+                        "q25": 21.0906,
+                        "median": 24.6181,
+                        "q75": 41.3078,
+                        "max": 65.5457,
+                        "skewness": 0.867,
+                        "kurtosis": -0.6164
+                    },
+                    "IRRADIATION": {
+                        "count": 3182,
+                        "mean": 0.2283,
+                        "std": 0.3008,
+                        "min": 0.0,
+                        "q25": 0.0,
+                        "median": 0.0247,
+                        "q75": 0.4496,
+                        "max": 1.2217,
+                        "skewness": 1.0603,
+                        "kurtosis": -0.1799
+                    }
+                },
+                "categorical_summary": {
+                    "DATE_TIME": {
+                        "unique_count": 3182,
+                        "top_values": {
+                            "2020-05-15 00:00:00": 1,
+                            "2020-05-15 00:15:00": 1,
+                            "2020-05-15 00:30:00": 1,
+                            "2020-05-15 00:45:00": 1,
+                            "2020-05-15 01:00:00": 1
+                        }
+                    },
+                    "SOURCE_KEY": {
+                        "unique_count": 1,
+                        "top_values": {
+                            "HmiyD2TTLFNqkNe": 3182
+                        }
+                    }
+                },
+                "correlation_matrix": {
+                    "PLANT_ID": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": NaN,
+                        "MODULE_TEMPERATURE": NaN,
+                        "IRRADIATION": NaN
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": 1.0,
+                        "MODULE_TEMPERATURE": 0.8538,
+                        "IRRADIATION": 0.723
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": 0.8538,
+                        "MODULE_TEMPERATURE": 1.0,
+                        "IRRADIATION": 0.9616
+                    },
+                    "IRRADIATION": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": 0.723,
+                        "MODULE_TEMPERATURE": 0.9616,
+                        "IRRADIATION": 1.0
+                    }
+                }
+            },
+            "Plant_2_Generation_Data.csv": {
+                "filename": "Plant_2_Generation_Data.csv",
+                "rows": 67698,
+                "columns": 7,
+                "column_names": [
+                    "DATE_TIME",
+                    "PLANT_ID",
+                    "SOURCE_KEY",
+                    "DC_POWER",
+                    "AC_POWER",
+                    "DAILY_YIELD",
+                    "TOTAL_YIELD"
+                ],
+                "numerical_columns": [
+                    "PLANT_ID",
+                    "DC_POWER",
+                    "AC_POWER",
+                    "DAILY_YIELD",
+                    "TOTAL_YIELD"
+                ],
+                "categorical_columns": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "total_missing_values": 0,
+                "missing_values_by_column": {
+                    "DATE_TIME": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "PLANT_ID": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "SOURCE_KEY": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "DC_POWER": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "AC_POWER": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "DAILY_YIELD": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "TOTAL_YIELD": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    }
+                },
+                "exact_duplicate_rows": 0,
+                "composite_key_checked": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "composite_key_duplicates": 0,
+                "descriptive_statistics": {
+                    "PLANT_ID": {
+                        "count": 67698,
+                        "mean": 4136001.0,
+                        "std": 0.0,
+                        "min": 4136001.0,
+                        "q25": 4136001.0,
+                        "median": 4136001.0,
+                        "q75": 4136001.0,
+                        "max": 4136001.0,
+                        "skewness": 0.0,
+                        "kurtosis": 0.0
+                    },
+                    "DC_POWER": {
+                        "count": 67698,
+                        "mean": 246.702,
+                        "std": 370.5696,
+                        "min": 0.0,
+                        "q25": 0.0,
+                        "median": 0.0,
+                        "q75": 446.5917,
+                        "max": 1420.9333,
+                        "skewness": 1.3741,
+                        "kurtosis": 0.6307
+                    },
+                    "AC_POWER": {
+                        "count": 67698,
+                        "mean": 241.2778,
+                        "std": 362.1121,
+                        "min": 0.0,
+                        "q25": 0.0,
+                        "median": 0.0,
+                        "q75": 438.215,
+                        "max": 1385.42,
+                        "skewness": 1.3685,
+                        "kurtosis": 0.6096
+                    },
+                    "DAILY_YIELD": {
+                        "count": 67698,
+                        "mean": 3294.8903,
+                        "std": 2919.4484,
+                        "min": 0.0,
+                        "q25": 272.75,
+                        "median": 2911.0,
+                        "q75": 5534.0,
+                        "max": 9873.0,
+                        "skewness": 0.4892,
+                        "kurtosis": -0.9628
+                    },
+                    "TOTAL_YIELD": {
+                        "count": 67698,
+                        "mean": 658944788.4238,
+                        "std": 729667771.0732,
+                        "min": 0.0,
+                        "q25": 19964944.8667,
+                        "median": 282627587.0,
+                        "q75": 1348495113.0,
+                        "max": 2247916295.0,
+                        "skewness": 0.7524,
+                        "kurtosis": -0.9471
+                    }
+                },
+                "categorical_summary": {
+                    "DATE_TIME": {
+                        "unique_count": 3259,
+                        "top_values": {
+                            "2020-05-15 00:00:00": 22,
+                            "2020-05-15 00:15:00": 22,
+                            "2020-05-15 00:30:00": 22,
+                            "2020-05-15 00:45:00": 22,
+                            "2020-05-15 01:00:00": 22
+                        }
+                    },
+                    "SOURCE_KEY": {
+                        "unique_count": 22,
+                        "top_values": {
+                            "81aHJ1q11NBPMrL": 3259,
+                            "9kRcWv60rDACzjR": 3259,
+                            "LYwnQax7tkwH5Cb": 3259,
+                            "LlT2YUhhzqhg5Sw": 3259,
+                            "PeE6FRyGXUgsRhN": 3259
+                        }
+                    }
+                },
+                "correlation_matrix": {
+                    "PLANT_ID": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": NaN,
+                        "AC_POWER": NaN,
+                        "DAILY_YIELD": NaN,
+                        "TOTAL_YIELD": NaN
+                    },
+                    "DC_POWER": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 1.0,
+                        "AC_POWER": 1.0,
+                        "DAILY_YIELD": 0.0056,
+                        "TOTAL_YIELD": 0.0045
+                    },
+                    "AC_POWER": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 1.0,
+                        "AC_POWER": 1.0,
+                        "DAILY_YIELD": 0.0054,
+                        "TOTAL_YIELD": 0.0045
+                    },
+                    "DAILY_YIELD": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 0.0056,
+                        "AC_POWER": 0.0054,
+                        "DAILY_YIELD": 1.0,
+                        "TOTAL_YIELD": -0.0685
+                    },
+                    "TOTAL_YIELD": {
+                        "PLANT_ID": NaN,
+                        "DC_POWER": 0.0045,
+                        "AC_POWER": 0.0045,
+                        "DAILY_YIELD": -0.0685,
+                        "TOTAL_YIELD": 1.0
+                    }
+                }
+            },
+            "Plant_2_Weather_Sensor_Data.csv": {
+                "filename": "Plant_2_Weather_Sensor_Data.csv",
+                "rows": 3259,
+                "columns": 6,
+                "column_names": [
+                    "DATE_TIME",
+                    "PLANT_ID",
+                    "SOURCE_KEY",
+                    "AMBIENT_TEMPERATURE",
+                    "MODULE_TEMPERATURE",
+                    "IRRADIATION"
+                ],
+                "numerical_columns": [
+                    "PLANT_ID",
+                    "AMBIENT_TEMPERATURE",
+                    "MODULE_TEMPERATURE",
+                    "IRRADIATION"
+                ],
+                "categorical_columns": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "total_missing_values": 0,
+                "missing_values_by_column": {
+                    "DATE_TIME": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "PLANT_ID": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "SOURCE_KEY": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    },
+                    "IRRADIATION": {
+                        "null_count": 0,
+                        "null_percentage": 0.0
+                    }
+                },
+                "exact_duplicate_rows": 0,
+                "composite_key_checked": [
+                    "DATE_TIME",
+                    "SOURCE_KEY"
+                ],
+                "composite_key_duplicates": 0,
+                "descriptive_statistics": {
+                    "PLANT_ID": {
+                        "count": 3259,
+                        "mean": 4136001.0,
+                        "std": 0.0,
+                        "min": 4136001.0,
+                        "q25": 4136001.0,
+                        "median": 4136001.0,
+                        "q75": 4136001.0,
+                        "max": 4136001.0,
+                        "skewness": 0.0,
+                        "kurtosis": 0.0
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "count": 3259,
+                        "mean": 28.0694,
+                        "std": 4.0616,
+                        "min": 20.9424,
+                        "q25": 24.6021,
+                        "median": 26.9813,
+                        "q75": 31.0568,
+                        "max": 39.1816,
+                        "skewness": 0.6488,
+                        "kurtosis": -0.6838
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "count": 3259,
+                        "mean": 32.7724,
+                        "std": 11.344,
+                        "min": 20.2651,
+                        "q25": 23.7169,
+                        "median": 27.5346,
+                        "q75": 40.4807,
+                        "max": 66.636,
+                        "skewness": 0.9526,
+                        "kurtosis": -0.3972
+                    },
+                    "IRRADIATION": {
+                        "count": 3259,
+                        "mean": 0.2327,
+                        "std": 0.3127,
+                        "min": 0.0,
+                        "q25": 0.0,
+                        "median": 0.019,
+                        "q75": 0.4387,
+                        "max": 1.0988,
+                        "skewness": 1.062,
+                        "kurtosis": -0.3246
+                    }
+                },
+                "categorical_summary": {
+                    "DATE_TIME": {
+                        "unique_count": 3259,
+                        "top_values": {
+                            "2020-05-15 00:00:00": 1,
+                            "2020-05-15 00:15:00": 1,
+                            "2020-05-15 00:30:00": 1,
+                            "2020-05-15 00:45:00": 1,
+                            "2020-05-15 01:00:00": 1
+                        }
+                    },
+                    "SOURCE_KEY": {
+                        "unique_count": 1,
+                        "top_values": {
+                            "iq8k7ZNt4Mwm3w0": 3259
+                        }
+                    }
+                },
+                "correlation_matrix": {
+                    "PLANT_ID": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": NaN,
+                        "MODULE_TEMPERATURE": NaN,
+                        "IRRADIATION": NaN
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": 1.0,
+                        "MODULE_TEMPERATURE": 0.8473,
+                        "IRRADIATION": 0.6676
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": 0.8473,
+                        "MODULE_TEMPERATURE": 1.0,
+                        "IRRADIATION": 0.9469
+                    },
+                    "IRRADIATION": {
+                        "PLANT_ID": NaN,
+                        "AMBIENT_TEMPERATURE": 0.6676,
+                        "MODULE_TEMPERATURE": 0.9469,
+                        "IRRADIATION": 1.0
+                    }
+                }
+            }
+        },
+        "merged_plant_analysis": {
+            "Plant 1": {
+                "generation_timestamps_count": 3158,
+                "weather_timestamps_count": 3182,
+                "matched_timestamps_count": 3157,
+                "unmatched_generation_timestamps": 1,
+                "cross_correlation_weather_power": {
+                    "AC_POWER": {
+                        "AC_POWER": 1.0,
+                        "DC_POWER": 1.0,
+                        "AMBIENT_TEMPERATURE": 0.7259,
+                        "MODULE_TEMPERATURE": 0.961,
+                        "IRRADIATION": 0.9959
+                    },
+                    "DC_POWER": {
+                        "AC_POWER": 1.0,
+                        "DC_POWER": 1.0,
+                        "AMBIENT_TEMPERATURE": 0.7257,
+                        "MODULE_TEMPERATURE": 0.9609,
+                        "IRRADIATION": 0.996
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "AC_POWER": 0.7259,
+                        "DC_POWER": 0.7257,
+                        "AMBIENT_TEMPERATURE": 1.0,
+                        "MODULE_TEMPERATURE": 0.8532,
+                        "IRRADIATION": 0.7218
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "AC_POWER": 0.961,
+                        "DC_POWER": 0.9609,
+                        "AMBIENT_TEMPERATURE": 0.8532,
+                        "MODULE_TEMPERATURE": 1.0,
+                        "IRRADIATION": 0.9614
+                    },
+                    "IRRADIATION": {
+                        "AC_POWER": 0.9959,
+                        "DC_POWER": 0.996,
+                        "AMBIENT_TEMPERATURE": 0.7218,
+                        "MODULE_TEMPERATURE": 0.9614,
+                        "IRRADIATION": 1.0
+                    }
+                }
+            },
+            "Plant 2": {
+                "generation_timestamps_count": 3259,
+                "weather_timestamps_count": 3259,
+                "matched_timestamps_count": 3259,
+                "unmatched_generation_timestamps": 0,
+                "cross_correlation_weather_power": {
+                    "AC_POWER": {
+                        "AC_POWER": 1.0,
+                        "DC_POWER": 1.0,
+                        "AMBIENT_TEMPERATURE": 0.6481,
+                        "MODULE_TEMPERATURE": 0.8719,
+                        "IRRADIATION": 0.9111
+                    },
+                    "DC_POWER": {
+                        "AC_POWER": 1.0,
+                        "DC_POWER": 1.0,
+                        "AMBIENT_TEMPERATURE": 0.6483,
+                        "MODULE_TEMPERATURE": 0.8725,
+                        "IRRADIATION": 0.9117
+                    },
+                    "AMBIENT_TEMPERATURE": {
+                        "AC_POWER": 0.6481,
+                        "DC_POWER": 0.6483,
+                        "AMBIENT_TEMPERATURE": 1.0,
+                        "MODULE_TEMPERATURE": 0.8473,
+                        "IRRADIATION": 0.6676
+                    },
+                    "MODULE_TEMPERATURE": {
+                        "AC_POWER": 0.8719,
+                        "DC_POWER": 0.8725,
+                        "AMBIENT_TEMPERATURE": 0.8473,
+                        "MODULE_TEMPERATURE": 1.0,
+                        "IRRADIATION": 0.9469
+                    },
+                    "IRRADIATION": {
+                        "AC_POWER": 0.9111,
+                        "DC_POWER": 0.9117,
+                        "AMBIENT_TEMPERATURE": 0.6676,
+                        "MODULE_TEMPERATURE": 0.9469,
+                        "IRRADIATION": 1.0
+                    }
+                }
+            }
+        }
+    }
+}
