@@ -297,3 +297,76 @@ python src/cnn/extract_features.py --modality iv --split test
 ```
 If the trained model checkpoint is not yet available, the script cleanly informs the user that feature extraction is pending CNN training without failing or raising exceptions.
 
+---
+
+## 9. Phase 5: ANN-Based Solar Power Prediction
+
+### 9.1 Purpose & Role in PVision AI
+The Artificial Neural Network (ANN) regression subsystem models the quantitative relationship between meteorological conditions, thermal states, diurnal cycles, and continuous AC electrical power generation ($P_{AC}$, kW). 
+
+**Fundamental Architectural Distinction:**
+- **CNN Subsystem:** Operates exclusively on high-resolution image modalities (GASF and I-V curves) to diagnose discrete physical fault categories and extract latent spatial/electrical degradation embeddings.
+- **ANN Subsystem:** Operates exclusively on structured tabular meteorological and operational telemetry to predict instantaneous electrical generation.
+- *Scientific Clarification:* The CNN does not directly predict numerical power output from images alone. Rather, power prediction is modeled by the ANN from physical environmental telemetry, with CNN fault states providing operational conditioning in later hybrid stages.
+
+### 9.2 Confirmed Target Variable
+- **Target:** `AC_POWER` (Inverter Alternating Current Power Output).
+- **Unit:** Kilowatts (kW).
+- **Selection Rationale:** AC power represents the true commercial energy injected into the electrical grid after inverter conversion.
+
+### 9.3 Predictive Features & Feature Engineering
+A 12-dimensional feature vector is selected to capture solar thermodynamics and cyclical diurnal harmonics:
+1. `IRRADIATION`: Solar irradiance ($W/m^2$).
+2. `AMBIENT_TEMPERATURE`: Ambient dry-bulb air temperature ($^\circ C$).
+3. `MODULE_TEMPERATURE`: Module surface temperature ($^\circ C$).
+4. `TEMP_DIFFERENCE`: Thermal elevation above ambient ($T_{module} - T_{ambient}$).
+5. `IRRAD_MODULE_INTERACTION`: Interaction product ($\text{IRRADIATION} \times T_{module}$).
+6. `HOUR`, `MINUTE`, `TIME_DECIMAL`: Continuous daytime progress.
+7. `SIN_TIME`, `COS_TIME`: 24-hour circular trigonometric periodicity.
+8. `DAY_OF_WEEK`: Calendar day index ($0 - 6$).
+9. `IS_DAYTIME`: Binary operational daylight indicator.
+
+### 9.4 Data Leakage Prevention Safeguards
+- `AC_POWER`: Removed from feature matrix $X$ (direct target leakage prevention).
+- `DC_POWER`: Removed from $X$ (prevents trivial inverter conversion identity shortcut $P_{AC} \approx \eta \cdot P_{DC}$, $r \approx 0.9999$).
+- `DAILY_YIELD` & `TOTAL_YIELD`: Removed from $X$ (prevents cumulative time and non-stationary historical leakage).
+- `StandardScaler`: Fitted **strictly on the 70% training set**; validation and test sets are transformed without updating scaling statistics.
+
+### 9.5 Chronological Time-Series Splitting
+To prevent future-to-past temporal leakage in continuous time series, records are sorted chronologically by `DATETIME_PARSED`:
+- **Training Set (Earliest 70%):** 2020-05-15 00:00:00 to 2020-06-08 04:45:00 (48,097 rows).
+- **Validation Set (Next 15%):** 2020-06-08 04:45:00 to 2020-06-13 02:00:00 (10,306 rows).
+- **Test Set (Final 15% Holdout):** 2020-06-13 02:00:00 to 2020-06-17 23:45:00 (10,308 rows).
+
+### 9.6 ANN Architecture
+A configurable feed-forward multi-layer perceptron built with Keras Sequential API:
+```text
+Input (12 Features)
+   │
+   ▼
+Dense(128, activation='relu')
+   │
+   ▼
+Dropout(rate=0.20)
+   │
+   ▼
+Dense(64, activation='relu')
+   │
+   ▼
+Dense(32, activation='relu')
+   │
+   ▼
+Dense(1, activation='linear') ──► Predicted AC Power (kW)
+```
+
+### 9.7 Evaluation Methodology & Metrics
+Evaluation will be performed strictly on the unseen 15% chronological test holdout set:
+- **Metrics:** Mean Absolute Error (MAE, kW), Root Mean Squared Error (RMSE, kW), Coefficient of Determination ($R^2$).
+- **Status:** **PENDING TRAINING** *(To be executed manually in VS Code)*.
+- **Diagnostic Plots:** Actual vs. Predicted, Residual Error Distribution, Training/Validation Loss Convergence.
+
+### 9.8 Model Limitations
+1. Trained on 34 contiguous summer days (May–June 2020 in India); winter and monsoon patterns require future calibration.
+2. Inverter-level telemetry reflects nominal operations and requires hybrid fault-state conditioning to account for physical module defects.
+
+

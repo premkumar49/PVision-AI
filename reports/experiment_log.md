@@ -159,4 +159,29 @@
 - **Status:** Pipeline Prepared — Awaiting Trained CNN Model
 - **Notes:** Zero synthetic feature values or fabricated metrics generated. Pipeline verified with missing-checkpoint handling.
 
+### EXP-013: ANN Solar Power Prediction — Meteorological & Operational Regression
+- **Experiment ID:** EXP-013
+- **Dataset:** Solar Power Generation Telemetry (Plant 1 & Plant 2)
+- **Model Architecture:** Configurable Multi-Layer Perceptron (ANN)
+- **Topology:** Input(12) $\to$ Dense(128, ReLU) $\to$ Dropout(0.20) $\to$ Dense(64, ReLU) $\to$ Dense(32, ReLU) $\to$ Dense(1, Linear)
+- **Confirmed Target Variable:** `AC_POWER` (Inverter AC Power Output in kW)
+- **Predictive Features (12):** `IRRADIATION`, `AMBIENT_TEMPERATURE`, `MODULE_TEMPERATURE`, `TEMP_DIFFERENCE`, `IRRAD_MODULE_INTERACTION`, `HOUR`, `MINUTE`, `DAY_OF_WEEK`, `TIME_DECIMAL`, `SIN_TIME`, `COS_TIME`, `IS_DAYTIME`
+- **Leakage Prevention:**
+  - `AC_POWER` excluded from X
+  - `DC_POWER` excluded (avoids $r \approx 0.9999$ identity shortcut)
+  - `DAILY_YIELD` & `TOTAL_YIELD` excluded (avoids cumulative energy leakage)
+  - Identifiers (`PLANT_ID`, `SOURCE_KEY`, timestamps) excluded
+- **Split Strategy:** Chronological Time-Series Splitting (No random shuffling)
+  - Train: 70% ($48,097$ rows, May 15 – June 08, 2020)
+  - Validation: 15% ($10,306$ rows, June 08 – June 13, 2020)
+  - Test: 15% ($10,308$ rows, June 13 – June 17, 2020)
+- **Feature Scaling:** `StandardScaler` fitted **strictly on training set**
+- **Random Seed:** 42
+- **Optimizer:** Adam ($\eta = 0.001$, loss = MSE)
+- **Callbacks:** EarlyStopping (patience = 10), ModelCheckpoint (`models/ann/best_ann_model.keras`)
+- **Training Execution:** NOT EXECUTED IN ANTIGRAVITY (Reserved for manual execution by user in VS Code)
+- **Status:** PIPELINE CREATED — TRAINING PENDING
+- **Evaluation Metrics:** MAE, RMSE, $R^2$ (Status: PENDING)
+
+
 

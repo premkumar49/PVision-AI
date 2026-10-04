@@ -226,3 +226,61 @@
   - Zero artificial 1-to-1 pairing (no synthetic `image_001` $\to$ `row_001` joins).
   - Hybrid integration relies on physical scenario analysis rather than arbitrary row-wise merging.
 
+---
+
+### Slide 17: ANN Power Prediction Pipeline (`train_ann.py`)
+- **Objective:** Continuous AC power forecasting from structured environmental telemetry.
+- **Confirmed Target Variable:** `AC_POWER` (Inverter Alternating Current Power Output in kW).
+- **Physical Predictive Features (12 Variables):**
+  - Environmental: `IRRADIATION`, `AMBIENT_TEMPERATURE`, `MODULE_TEMPERATURE`.
+  - Thermodynamic Interactions: `TEMP_DIFFERENCE` ($T_{mod} - T_{amb}$), `IRRAD_MODULE_INTERACTION` ($I \cdot T_{mod}$).
+  - Diurnal & Temporal: `HOUR`, `MINUTE`, `TIME_DECIMAL`, `SIN_TIME`, `COS_TIME`, `DAY_OF_WEEK`, `IS_DAYTIME`.
+- **Chronological Time-Series Splitting:**
+  - 70% Train (earliest: May 15 to June 08) $\to$ $48,097$ samples.
+  - 15% Val (intermediate: June 08 to June 13) $\to$ $10,306$ samples.
+  - 15% Test (latest: June 13 to June 17) $\to$ $10,308$ samples.
+  - Zero random shuffling (prevents temporal future-to-past data leakage).
+
+---
+
+### Slide 18: ANN Regression Architecture & Safeguards
+- **Multi-Layer Perceptron (MLP) Topology:**
+  ```text
+  Input Features (12 units)
+          │
+          ▼
+  Dense Layer 1 (128 units, ReLU)
+          │
+          ▼
+  Dropout Regularization (rate = 0.20)
+          │
+          ▼
+  Dense Layer 2 (64 units, ReLU)
+          │
+          ▼
+  Dense Layer 3 (32 units, ReLU)
+          │
+          ▼
+  Output Layer (1 unit, Linear) ──► Predicted AC Power (kW)
+  ```
+- **Strict Leakage Prevention Protocol:**
+  - `DC_POWER` excluded (avoids $r \approx 0.9999$ identity shortcut).
+  - `DAILY_YIELD` & `TOTAL_YIELD` excluded (avoids non-stationary cumulative leakage).
+  - `StandardScaler` fitted **strictly on training partition**; test data scaled out-of-sample.
+
+---
+
+### Slide 19: ANN Evaluation Protocol (`evaluate_ann.py`)
+- **Chronological Holdout Evaluation:**
+  - Evaluated exclusively on the unseen final 15% test set (June 13 to June 17, 2020).
+- **Standardized Performance Metrics:**
+  - Mean Absolute Error (MAE, kW).
+  - Root Mean Squared Error (RMSE, kW).
+  - Coefficient of Determination ($R^2$, goodness of fit).
+  - *Evaluation Status:* **Results to be populated after VS Code training.**
+- **Diagnostic Export Plots (`reports/figures/`):**
+  - `ann_actual_vs_predicted.png`: Parity plot with $y=x$ ideal reference.
+  - `ann_residual_plot.png`: Error distribution across the operational power range.
+  - `ann_training_validation_loss.png`: MSE convergence curve across training epochs.
+
+
