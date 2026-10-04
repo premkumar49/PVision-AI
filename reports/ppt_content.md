@@ -181,3 +181,48 @@
   python src/cnn/evaluate_cnn.py --modality iv
   ```
 - **Next Phase:** User executes training in VS Code; reports will be updated with actual empirical scores.
+
+---
+
+### Slide 15: CNN Feature Extraction Architecture (`extract_features.py`)
+- **Latent Representation Extraction Flow:**
+  ```text
+  PV Image (GASF: 256×256 | I-V: 1343×808)
+          │
+          ▼
+  Aspect-Preserving Preprocessing (224×224×3)
+          │
+          ▼
+  EfficientNetV2-S Pretrained Backbone
+          │
+          ▼
+  Global Average Pooling ('global_avg_pool') ──► Latent Feature Vector (1,280-D)
+          │
+          ▼
+  Batch Normalization & Dropout
+          │
+          ▼
+  Dense Head (Softmax 7-Class) ────────────────► Categorical Prediction & 7 Probabilities
+  ```
+- **Extracted Prediction & Embedding Data:**
+  - `predicted_class`: Top predicted fault state among 7 classes.
+  - `confidence`: Softmax probability corresponding to the top class.
+  - `class_probabilities`: Full posterior distribution across all 7 fault categories.
+  - `feature_vector`: High-level continuous embedding vector capturing non-linear curve slopes and spatial texture signatures.
+- **Dual-Format Persistence:**
+  - NumPy dense matrix: `results/cnn/features/{modality}_features.npy`.
+  - Tabular metadata: `results/cnn/features/{modality}_features.csv`.
+  - Machine-readable audit: `results/cnn/features/{modality}_feature_metadata.json`.
+
+---
+
+### Slide 16: Hybrid CNN-ANN Concept & Scientific Integrity Boundaries
+- **Potential Hybrid Integration Pathways:**
+  1. **Discrete Fault Conditioning:** Providing predicted fault labels as categorical indicators to the ANN to shift power baseline.
+  2. **Soft Probability Modulation:** Inputting 7-class probability vectors to express diagnostic uncertainty.
+  3. **Latent Embedding Conditioning:** Concatenating regularized low-dimensional projections with environmental telemetry.
+- **Core Scientific Boundary:**
+  - PV images and solar time-series originate from separate physical experimental domains.
+  - Zero artificial 1-to-1 pairing (no synthetic `image_001` $\to$ `row_001` joins).
+  - Hybrid integration relies on physical scenario analysis rather than arbitrary row-wise merging.
+

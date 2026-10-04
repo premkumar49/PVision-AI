@@ -128,3 +128,35 @@
 - **Status:** Planned / Not Yet Trained (Reserved for manual execution by user in VS Code)
 - **Target Weights Output:** `models/cnn/efficientnetv2s_iv_best.keras`
 
+### EXP-011: CNN Feature Extraction & Latent Embedding — GASF Modality
+- **Experiment ID:** EXP-011
+- **Dataset:** PV Fault Image Dataset (GASF Modality)
+- **Model:** EfficientNetV2-S (ImageNet Pretrained + Fine-Tuned)
+- **Feature Extraction Layer:** `global_avg_pool` (GlobalAveragePooling2D)
+- **Feature Dimension:** [To be determined from trained model]
+- **Script:** `src/cnn/extract_features.py --modality gasf`
+- **Output Formats:**
+  - Feature Matrix: `results/cnn/features/gasf_features.npy`
+  - Prediction Metadata: `results/cnn/features/gasf_features.csv`
+  - Extraction Metadata: `results/cnn/features/gasf_feature_metadata.json`
+- **Analysis Modules:** 2D PCA Projection (`results/cnn/features/gasf_feature_pca.png`)
+- **Status:** Pipeline Prepared — Awaiting Trained CNN Model
+- **Notes:** Zero synthetic feature values or fabricated metrics generated. Pipeline verified with missing-checkpoint handling.
+
+### EXP-012: CNN Feature Extraction & Latent Embedding — I-V Modality
+- **Experiment ID:** EXP-012
+- **Dataset:** PV Fault Image Dataset (I-V Curve Modality)
+- **Model:** EfficientNetV2-S (ImageNet Pretrained + Fine-Tuned)
+- **Feature Extraction Layer:** `global_avg_pool` (GlobalAveragePooling2D)
+- **Feature Dimension:** [To be determined from trained model]
+- **Preprocessing:** Aspect-ratio-preserving resize and padding to $224 \times 224 \times 3$
+- **Script:** `src/cnn/extract_features.py --modality iv`
+- **Output Formats:**
+  - Feature Matrix: `results/cnn/features/iv_features.npy`
+  - Prediction Metadata: `results/cnn/features/iv_features.csv`
+  - Extraction Metadata: `results/cnn/features/iv_feature_metadata.json`
+- **Analysis Modules:** 2D PCA Projection (`results/cnn/features/iv_feature_pca.png`)
+- **Status:** Pipeline Prepared — Awaiting Trained CNN Model
+- **Notes:** Zero synthetic feature values or fabricated metrics generated. Pipeline verified with missing-checkpoint handling.
+
+

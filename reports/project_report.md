@@ -239,3 +239,61 @@ python src/cnn/predict_cnn.py --image-path data/pv_fault/gasf_images/hotspot/hot
 Model checkpoints will be output to:
 - `models/cnn/efficientnetv2s_gasf_best.keras`
 - `models/cnn/efficientnetv2s_iv_best.keras`
+
+---
+
+## 8. Phase 4: CNN Feature Extraction Pipeline & Hybrid Integration
+
+### 8.1 Purpose & Role in Hybrid Architecture
+The CNN feature extraction pipeline serves as the analytical bridge between raw visual/graphical PV diagnostics and the subsequent modeling stages. Rather than treating the CNN purely as a black-box categorical predictor, the feature extraction framework extracts:
+1. **Discrete Fault Diagnostics:** Argmax fault classifications and 7-class posterior confidence scores.
+2. **Latent Visual/Physical Embeddings:** Continuous intermediate representations from the penultimate pooling layer that encode high-order non-linear physical characteristics (e.g., knee degradation in I-V curves, texture anomalies in GASF).
+
+### 8.2 Feature Extraction Architecture
+Feature extraction is performed without retraining or weight disturbance using a sub-model tapping the intermediate pooling layer:
+```text
+Input Image (224×224×3)
+       │
+       ▼
+EfficientNetV2-S Backbone (Fused-MBConv / MBConv)
+       │
+       ▼
+Global Average Pooling ('global_avg_pool') ──► [ 1,280-D Feature Vector ]
+       │
+       ▼
+Batch Normalization & Dropout
+       │
+       ▼
+Dense Softmax Head (7 units) ───────────────► [ 7-Class Posterior Probabilities ]
+```
+
+### 8.3 Feature Vector Representation & Storage
+Extracted representations are stored in `results/cnn/features/`:
+- `{modality}_features.npy`: High-performance dense NumPy matrix of shape $(N, 1280)$.
+- `{modality}_features.csv`: Tabular metadata containing `image_id`, `true_class`, `predicted_class`, `confidence`, individual class probabilities (`prob_crack` through `prob_short_circuit`), and vector reference pointers.
+- `{modality}_feature_metadata.json`: Machine-readable audit trail capturing layer names, dimensions, timestamp, preprocessing parameters, and model lineage.
+
+### 8.4 Feature Visualization (PCA)
+To verify class clustering in unsupervised projection space, the pipeline implements 2D Principal Component Analysis (PCA) generating:
+- `results/cnn/features/gasf_feature_pca.png`
+- `results/cnn/features/iv_feature_pca.png`
+*Crucial methodological rule: PCA is used strictly for exploratory 2D geometric visualization. PCA clustering does not substitute for quantitative test set evaluation or guarantee downstream regression improvements.*
+
+### 8.5 Scientific Limitation & Dataset Separation
+> [!CAUTION]
+> **Prohibition of Artificial 1-to-1 Dataset Pairing:**
+> The PV fault image dataset (69,484 GASF and I-V images) and the solar generation time-series dataset (68,778 environmental records) originate from separate installations and physical systems.
+> - Under no circumstances will artificial sample-to-sample pairings (e.g., `image_0001` $\to$ `generation_row_0001`) be synthesized.
+> - Downstream hybrid ANN integration will operate via scientifically defensible scenario conditioning (e.g., applying fault state penalties or synthetic degradation factors across environmental regimes) rather than arbitrary row-wise merging.
+
+### 8.6 Feature Extraction Execution Guide
+Once CNN training is completed:
+```bash
+# Extract features from GASF test set
+python src/cnn/extract_features.py --modality gasf --split test
+
+# Extract features from I-V test set
+python src/cnn/extract_features.py --modality iv --split test
+```
+If the trained model checkpoint is not yet available, the script cleanly informs the user that feature extraction is pending CNN training without failing or raising exceptions.
+
